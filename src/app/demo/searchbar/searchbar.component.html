@@ -1,56 +1,87 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>homepage-title</title>
+  <title>Homepage Title</title>
 </head>
 
 <body>
 
-  <div class="container">
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid d-flex justify-content-center">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-  </div>
+  <div class="container m-0 p-0 lifecon">
 
-
-  <div class="container border sidebar">
-    <br>
-
-
-    <div class="container  p-2 rounded shadow row mb-1" *ngFor="let x of names">
-      <div class="mt-2 col-1">
-        <img src="assets/skull-devil-cyborg-samurai-face-3d-rendering-ai-generated-photo.jpeg" class="rounded-circle"
-          alt="Cinque Terre" width="30" height="30">
-      </div>
-      <div class="col-8 ms-3 mt-2">
-        <p>{{x}}</p>
-      </div>
+    <div class="container-fluid d-flex justify-content-center searchbar">
+      <form class="d-flex" role="search">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
     </div>
 
+    <div class="container p-0 m-0 mainmm">
 
+      <div class="container border-bottom p-0 m-0">
+        <div class="container row p-0 m-0">
+          <div class="col-1 p-0 imgbox1">
+            <img src="assets/skull-devil-cyborg-samurai-face-3d-rendering-ai-generated-photo.jpeg"
+              class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+          </div>
+          <div class="col p-0" *ngIf="selectedName === null">
+            <!-- Content for null selectedName -->
+          </div>
+          <div class="col p-0" *ngIf="selectedName !== null">
+            {{ selectedName }}
+          </div>
+        </div>
+      </div>
 
-    <a (click)="duplicateContainer()" class="btn btn-primary btn-lg sticky-button rounded-circle">
-      <span class="text-white">A</span>
-    </a>
+      <div class="container border p-0 m-0 messagebox">
+        <h1>hi there just a test</h1>
+      </div>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn shadow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Create new group
-    </button>
+      
+        <div class="container sendmessagebox border">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" id="message" name="message" rows="1" placeholder="Enter your message" style="resize: none;" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      
 
-  
-<app-modal></app-modal>
+    </div>
+
+    <div class="container shadow p-0 sidebar">
+
+      <div class="container row p-0 m-0 border-bottom">
+        <div class="col-3 p-0">
+          <h4 style="margin: 0;">Chat</h4>
+        </div>
+        <div class="col-2 p-0 probox">
+          <p>1</p>
+        </div>
+      </div>
+
+      <div class="container row p-1 mb-1 ms-0 rounded indibox" *ngFor="let x of names"
+        (click)="handleContainerClick(x)">
+        <div class="col-3 p-0 mt-2 imgbox">
+          <img src="assets/skull-devil-cyborg-samurai-face-3d-rendering-ai-generated-photo.jpeg"
+            class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+        </div>
+        <div class="col-8 ps-0 mt-2 probox">
+          <p>{{ x }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-2 border rounded ms-3 mb-2 position-absolute bottom-0 start-0" data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">
+      <p style="margin: 5px 0 5px 0; text-align: center;">Create new group</p>
+    </div>
+    <app-modal></app-modal>
+
   </div>
-
-
-
 
 </body>
 

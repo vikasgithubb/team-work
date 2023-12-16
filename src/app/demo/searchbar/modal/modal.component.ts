@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { members } from './members';
 import { HttpClient } from '@angular/common/http';
 import { fromdatapo } from './fromdatapo';
+import { catchError } from 'rxjs/internal/operators/catchError';
+
 
 @Component({
   selector: 'app-modal',
@@ -24,20 +26,17 @@ export class ModalComponent {
     { id: 11, name: 'naaresh' },
   ];
 
-  selectedOptions: any[] = [];
-
+  selectedOptions: members[] = [];
   groupname: String = "";
-
   groupobjective: String = "";
 
   private membersurl = 'https://e1ce3626-d1e1-4bd7-a736-f15ba06b8b81.mock.pstmn.io/posttest';
+  handleUpdateResponse: any;
+  handleError: any;
+  HandleRequiredErrorResponse: any;
   constructor(private http: HttpClient) { }
 
-
   onSubmit() {
-
-
-
 
     let formData = {
       selectedOptions: this.selectedOptions,
@@ -45,18 +44,8 @@ export class ModalComponent {
       groupobjective: this.groupobjective
     };
 
-    this.http.post<fromdatapo>(this.membersurl, formData).subscribe(
-      response => {
-        // Handle the response as needed
-        console.log('Server response:', response);
-
-        // Optionally, reset the form or perform other actions after successful submission
-
-      },
-      error => {
-        // Handle errors
-        console.error('Error submitting form:', error);
-      }
+     this.http.post<fromdatapo>(this.membersurl, formData).pipe(
+      catchError(err => this.HandleRequiredErrorResponse(err))
     );
 
     this.resetForm();

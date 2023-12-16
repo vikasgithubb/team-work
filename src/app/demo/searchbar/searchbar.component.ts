@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit{
 
- 
-  names: string[]= ["vikas","vivek","somu"];
+
+
+  selectedName: string | null = null;
+
+  names: string[]= ["vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas ruddy","vivek","chandu"];
 
 
    ngOnInit(): void {
@@ -22,6 +25,12 @@ export class SearchbarComponent implements OnInit{
       this.names.push(newName);
     }
     
+  }
+
+  handleContainerClick(username: string){
+   
+    this.selectedName = username;
+   
   }
 
    

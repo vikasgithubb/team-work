@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './demo/searchbar/modal/modal.component';
 import {  NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
+import { NgSlimScrollModule } from 'ngx-slimscroll';
+
 
 
 
@@ -23,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
         DemoComponent,
         SearchbarComponent,
         ModalComponent,
+        
        
         
     ],
@@ -33,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
         AppRoutingModule,
         FormsModule,
         NgSelectModule,
-        HttpClientModule
+        HttpClientModule,
+        NgSlimScrollModule
        
      
     ]
