@@ -11,6 +11,8 @@ import { ModalComponent } from './demo/searchbar/modal/modal.component';
 import {  NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSlimScrollModule } from 'ngx-slimscroll';
+import { AuthModule } from './auth/auth.module';
+
 
 
 
@@ -24,7 +26,8 @@ import { NgSlimScrollModule } from 'ngx-slimscroll';
         HomepageComponent,
         DemoComponent,
         SearchbarComponent,
-        ModalComponent,
+        ModalComponent
+        
         
        
         
@@ -37,7 +40,9 @@ import { NgSlimScrollModule } from 'ngx-slimscroll';
         FormsModule,
         NgSelectModule,
         HttpClientModule,
-        NgSlimScrollModule
+        NgSlimScrollModule,
+        AuthModule
+        
        
      
     ]

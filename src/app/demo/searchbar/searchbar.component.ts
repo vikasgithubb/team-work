@@ -11,6 +11,7 @@ export class SearchbarComponent implements OnInit{
 
   selectedName: string | null = null;
 
+
   names: string[]= ["vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas ruddy","vivek","chandu"];
 
 
@@ -32,6 +33,8 @@ export class SearchbarComponent implements OnInit{
     this.selectedName = username;
    
   }
+
+
 
    
 
