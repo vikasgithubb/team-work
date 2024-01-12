@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { members } from './members';
 import { HttpClient } from '@angular/common/http';
 import { fromdatapo } from './fromdatapo';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { Userdetails } from '../userdetails';
 
 
 @Component({
@@ -10,21 +11,37 @@ import { catchError } from 'rxjs/internal/operators/catchError';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit{
 
-  options: members[] = [
-    { id: 1, name: 'Option 1' },
-    { id: 2, name: 'Option 2' },
-    { id: 3, name: 'Option 3' },
-    { id: 4, name: 'Option 4' },
-    { id: 5, name: 'Option 5' },
-    { id: 6, name: 'vikas' },
-    { id: 7, name: 'somu' },
-    { id: 8, name: 'somppa' },
-    { id: 9, name: 'vivvek' },
-    { id: 10, name: 'veeresh' },
-    { id: 11, name: 'naaresh' },
-  ];
+  @Input()
+  jsonData!: Userdetails[] | null;
+  options!: Userdetails[] | null;
+  
+
+  // options: Userdetails[] = this.jsonData;
+
+  // options: members[] = [
+  //   { id: 1, name: 'Option 1' },
+  //   { id: 2, name: 'Option 2' },
+  //   { id: 3, name: 'Option 3' },
+  //   { id: 4, name: 'Option 4' },
+  //   { id: 5, name: 'Option 5' },
+  //   { id: 6, name: 'vikas' },
+  //   { id: 7, name: 'somu' },
+  //   { id: 8, name: 'somppa' },
+  //   { id: 9, name: 'vivvek' },
+  //   { id: 10, name: 'veeresh' },
+  //   { id: 11, name: 'naaresh' },
+  // ];
+
+  
+
+  ngOnInit() {
+    this.options = this.jsonData;
+    console.log('my options',this.options);
+  }
+
+  
 
   selectedOptions: members[] = [];
   groupname: String = "";

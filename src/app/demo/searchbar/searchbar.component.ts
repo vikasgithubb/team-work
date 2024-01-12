@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Userdetails } from './userdetails';
 
 @Component({
   selector: 'app-searchbar',
@@ -6,8 +9,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit{
+ 
 
+  constructor(private http: HttpClient) {
+    this.fetchData();
+   }
 
+  private apiUrl = 'http://localhost:8080/api/v1/users/allusers';
+
+    searchTerm: string = '';
+    jsonData: Userdetails[] = [];
+    searchResults: Userdetails[] = [];
+  
+
+    fetchData() {
+      this.http.get<Userdetails[]>(this.apiUrl).subscribe(data => {
+        this.jsonData = data;
+      });
+    }
+  
+    onSearch() {
+      // Perform search logic here based on this.searchTerm
+      this.searchResults = this.jsonData.filter(user =>
+        user.firstname.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  
 
   selectedName: string | null = null;
 
@@ -33,6 +60,13 @@ export class SearchbarComponent implements OnInit{
     this.selectedName = username;
    
   }
+
+
+  
+
+
+
+
 
 
 

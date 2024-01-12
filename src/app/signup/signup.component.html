@@ -1,0 +1,45 @@
+<div class="container  position-absolute top-50 start-50
+ translate-middle border  text-center m-0 p-0 shadow rounded maincontent">
+
+ <p>Fill in the details below to sign up for Teamwork:</p>
+
+<form>
+  
+
+    <div class="mb-3 row pt-1">
+        <label for="exampleInputPassword1" class="col-sm-3 col-form-label p-0 pt-1">Firstname</label>
+        <div class="col-sm-5 p-0">
+          <input type="text" class="form-control"  placeholder="firstname" #firstname>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="exampleInputPassword1" class="col-sm-3 col-form-label p-0 pt-1">Lastname</label>
+        <div class="col-sm-5 p-0">
+          <input type="text" class="form-control"  placeholder="lastname" #lastname>
+        </div>
+      </div>
+
+    <div class="mb-3 row ">
+      <label for="exampleInputEmail1" class="col-sm-3 col-form-label p-0 pt-1">Email</label>
+      <div class="col-sm-7 p-0">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email address" aria-describedby="emailHelp" #emailInput>
+      </div>
+    </div>
+    
+    <div class="mb-3 row">
+      <label for="exampleInputPassword1" class="col-sm-3 col-form-label p-0 pt-1">Password</label>
+      <div class="col-sm-7 p-0">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" #passwordInput>
+      </div>
+    </div>
+
+
+  
+    <button class="btn btn-primary ms-2 pb-2"  (click)="signup(firstname.value,lastname.value,emailInput.value,passwordInput.value).subscribe()">Submit</button>
+
+
+    
+  </form>
+
+</div>

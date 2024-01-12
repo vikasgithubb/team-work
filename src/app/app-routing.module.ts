@@ -4,9 +4,12 @@ import { DemoComponent } from './demo/demo.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { authGuard } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth/auth.component';
+import { SignupComponent } from './signup/signup.component';
+
 
 const routes: Routes = [{path: 'demo', component: DemoComponent, canActivate: [authGuard]},
 {path: 'auth', component: AuthComponent},
+{path: 'signup', component: SignupComponent},
 {path: 'home', component: HomepageComponent},
 {path: '', redirectTo: '/home', pathMatch: 'full'} ];
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 
@@ -11,6 +11,9 @@ export class AuthComponent {
 
 
   constructor(public authService: AuthService) { }
+
+
+
 
 
 

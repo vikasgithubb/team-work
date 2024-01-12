@@ -9,9 +9,12 @@ import { SearchbarComponent } from './demo/searchbar/searchbar.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './demo/searchbar/modal/modal.component';
 import {  NgSelectModule } from '@ng-select/ng-select';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgSlimScrollModule } from 'ngx-slimscroll';
 import { AuthModule } from './auth/auth.module';
+import { SignupComponent } from './signup/signup.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+
 
 
 
@@ -26,13 +29,22 @@ import { AuthModule } from './auth/auth.module';
         HomepageComponent,
         DemoComponent,
         SearchbarComponent,
-        ModalComponent
+        ModalComponent,
+        SignupComponent
+        
         
         
        
         
     ],
-    providers: [],
+    providers: [
+        
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -42,7 +54,6 @@ import { AuthModule } from './auth/auth.module';
         HttpClientModule,
         NgSlimScrollModule,
         AuthModule
-        
        
      
     ]
