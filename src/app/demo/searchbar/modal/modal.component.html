@@ -15,7 +15,7 @@
                         aria-describedby="basic-addon1" [(ngModel)]="groupname">
                 </div>
                 <div class="mb-3">
-                    <ng-select [items]="options" [multiple]="true" bindLabel="name" [(ngModel)]="selectedOptions" [closeOnSelect]="false"
+                    <ng-select [items]="options" [multiple]="true" bindLabel="name" (click)="fetchoptions()" [(ngModel)]="selectedOptions" [closeOnSelect]="false"
                         placeholder="Select Group Members" [virtualScroll]="true">
                     </ng-select>
                 </div>

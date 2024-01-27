@@ -2,39 +2,32 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Userdetails } from './userdetails';
+import { UserdataService } from 'src/app/userdata.service';
 
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.css']
 })
-export class SearchbarComponent implements OnInit{
- 
+export class SearchbarComponent {
+  
 
-  constructor(private http: HttpClient) {
-    this.fetchData();
+  
+  constructor(private http: HttpClient,private userdataservice: UserdataService) {
+    this.userdataservice.fetchData();
    }
 
-  private apiUrl = 'http://localhost:8080/api/v1/users/allusers';
-
-    searchTerm: string = '';
-    jsonData: Userdetails[] = [];
-    searchResults: Userdetails[] = [];
-  
-
-    fetchData() {
-      this.http.get<Userdetails[]>(this.apiUrl).subscribe(data => {
-        this.jsonData = data;
-      });
-    }
+   searchTerm: string = '';
+  searchResults: Userdetails[] = [];
   
     onSearch() {
-      // Perform search logic here based on this.searchTerm
-      this.searchResults = this.jsonData.filter(user =>
-        user.firstname.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
-  
+      this.userdataservice.fetchData().subscribe(data => {
+        // Perform search logic here based on this.searchTerm
+        this.searchResults = data.filter(user =>
+          user.firstname.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+      });
+  }
 
   selectedName: string | null = null;
 
@@ -42,9 +35,7 @@ export class SearchbarComponent implements OnInit{
   names: string[]= ["vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas madugundu","vivek","somu","vikas ruddy","vivek","chandu"];
 
 
-   ngOnInit(): void {
-    console.log("start");
-   }
+
 
    duplicateContainer() {
     const newName = prompt('Enter a new name:');

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { fromdatapo } from './fromdatapo';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { Userdetails } from '../userdetails';
+import { UserdataService } from 'src/app/userdata.service';
 
 
 @Component({
@@ -11,59 +12,65 @@ import { Userdetails } from '../userdetails';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent{
 
-  @Input()
-  jsonData!: Userdetails[] | null;
-  options!: Userdetails[] | null;
-  
+ 
 
-  // options: Userdetails[] = this.jsonData;
-
-  // options: members[] = [
-  //   { id: 1, name: 'Option 1' },
-  //   { id: 2, name: 'Option 2' },
-  //   { id: 3, name: 'Option 3' },
-  //   { id: 4, name: 'Option 4' },
-  //   { id: 5, name: 'Option 5' },
-  //   { id: 6, name: 'vikas' },
-  //   { id: 7, name: 'somu' },
-  //   { id: 8, name: 'somppa' },
-  //   { id: 9, name: 'vivvek' },
-  //   { id: 10, name: 'veeresh' },
-  //   { id: 11, name: 'naaresh' },
-  // ];
-
-  
-
-  ngOnInit() {
-    this.options = this.jsonData;
-    console.log('my options',this.options);
+  constructor(private http: HttpClient, private userdataservice: UserdataService) {
+    
   }
 
+  options: members[] = []; 
   
 
+fetchoptions() {
+  this.userdataservice.fetchData().subscribe(data => {
+    this.options = data.map(user => ({
+      name: user.firstname,
+      id: user.id 
+    }));
+  });
+}
+
+   
+
+
   selectedOptions: members[] = [];
+  handleError:any;
   groupname: String = "";
   groupobjective: String = "";
 
-  private membersurl = 'https://e1ce3626-d1e1-4bd7-a736-f15ba06b8b81.mock.pstmn.io/posttest';
+  private membersurl = 'http://localhost:8080/api/v1/teammates/save';
   handleUpdateResponse: any;
-  handleError: any;
+ 
   HandleRequiredErrorResponse: any;
-  constructor(private http: HttpClient) { }
+
 
   onSubmit() {
 
+    let randomTeamId = Math.floor(Math.random() * 1000) + 1;
     let formData = {
-      selectedOptions: this.selectedOptions,
-      groupname: this.groupname,
-      groupobjective: this.groupobjective
+      team: {
+        teamid: randomTeamId,
+        teamname: this.groupname,
+        description: this.groupobjective,
+        teammates: this.selectedOptions.map(option => ({ id: option.id, teamid: randomTeamId }))
+      }
     };
 
-     this.http.post<fromdatapo>(this.membersurl, formData).pipe(
-      catchError(err => this.HandleRequiredErrorResponse(err))
-    );
+    console.log('team information',formData);
+
+    this.http.post<fromdatapo>(this.membersurl, formData).subscribe(
+      response => {
+        // Handle the response here
+        this.handleUpdateResponse(response);
+      },
+      error => {
+        // Handle errors here
+        this.handleError(error);
+      }
+   );
+   
 
     this.resetForm();
   }
@@ -74,8 +81,6 @@ export class ModalComponent implements OnInit{
     this.groupname = "";
     this.groupobjective = "";
   }
-
-
 
 
 }
