@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Userdetails } from './demo/searchbar/userdetails';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { Teamdata } from './teamdata';
 
 @Injectable({
@@ -16,16 +16,11 @@ export class UserdataService {
   private apiUrl = 'http://localhost:8080/api/v1/users/allusers';
 
 
-  private teamapiurl = 'http://localhost:8080/api/v1/teams/teamup';
 
-
-    
-   
 
   
   jsonData: Userdetails[] = [];
  
-
 
   fetchData(): Observable<Userdetails[]> {
     if (this.jsonData.length > 0) {
@@ -44,12 +39,18 @@ export class UserdataService {
     }
   }
 
+  private teamapiurl = 'http://localhost:8080/api/v1/teams/teamlist/';
 
-  fetchteamdata(): Observable<Teamdata>{
+  fetchteamdata(user: any): Observable<string []>{
 
+    const apiEndpoint = this.teamapiurl + user;
 
-    return this.http.get<Teamdata>(this.teamapiurl);
+    return this.http.get<Teamdata[]>(apiEndpoint).pipe(
+      map((teamDataArray: Teamdata[]) => teamDataArray.map(data => data.teamname))
+    );
+  }
+
   }
 
 
-}
+

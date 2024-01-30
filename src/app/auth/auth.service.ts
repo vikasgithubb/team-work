@@ -10,6 +10,9 @@ import { AuthResponse } from './authresponse';
 })
 export class AuthService {
 
+ constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
+
+
   private token = '';
   
  
@@ -34,13 +37,18 @@ export class AuthService {
 
   get isLoggedIn() { return this.cookieService.get("access_token") !== 'logout';}
 
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
+  
+  private currentUser: any;
 
   login(user: string, password: string): Observable<AuthResponse> {
     const jsonPayload = {
       email: user,
       password: password
     };
+
+   
+
+    this.cookieService.set("currentUser",user);
 
     console.log('Sending JSON payload:', jsonPayload);
 
@@ -60,7 +68,12 @@ export class AuthService {
     this.router.navigate(['/signup']);
   }
 
+  getUser(): any {
+    return this.cookieService.get("currentUser");
+  }
+  
   logout() {
     this.cookieService.set("access_token",'logout');
+    this.cookieService.set("currentUser",'logout');
   }
 }

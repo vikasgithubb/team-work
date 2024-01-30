@@ -46,7 +46,7 @@
           <div class="col p-0" *ngIf="selectedName === null">
             <!-- Content for null selectedName -->
           </div>
-          <div class="col p-0" *ngIf="selectedName !== null">
+          <div class="col p-0 h6 pt-2" *ngIf="selectedName !== null">
             {{ selectedName }}
           </div>
         </div>
@@ -76,22 +76,22 @@
     <div class="container shadow p-0 sidebar">
 
       <div class="container row p-0 m-0 border-bottom">
-        <div class="col-3 p-0">
+        <div class="col-3 p-0 me-5">
           <h4 style="margin: 0;">Chat</h4>
         </div>
-        <div class="col-2 p-0 probox">
+        <div class="col-2 p-0">
           <p>1</p>
         </div>
       </div>
 
       <div class="container row p-1 mb-1 ms-0 rounded indibox" *ngFor="let x of names"
         (click)="handleContainerClick(x)">
-        <div class="col-3 p-0 mt-2 imgbox">
+        <div class="col-3 pe-0 mt-2 imgbox">
           <img src="assets\images\PikPng.com_profile-icon-png_805068.jpg"
             class="rounded-circle" alt="Cinque Terre" width="40" height="40">
         </div>
-        <div class="col-8 ps-0 mt-2 probox">
-          <p>{{ x }}</p>
+        <div class="col-8 ps-0 mt-2">
+          <p class="pt-1">{{ x }}</p>
         </div>
       </div>
 
